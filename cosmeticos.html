@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Jaens Beauty</title>
+        <link rel="stylesheet" href="estilo.css">
+    </head>
+    <body>
+
+    <header class="encabezado">
+        <h1>Jaens Beauty</h1>
+    <section class="hero">    
+        <nav>
+            <a href="#inicio">Inicio</a>
+            <a href="#productos">Productos</a>
+            <a href="#carrito">Carrito</a>
+        </nav>
+    </header>
+        <h2>La belleza comienza en el momento en que decides ser tú misma ✨</h2>
+    </section>
+
+    <section id="productos">
+        <h2>Nuestros Productos</h2>
+        <button onclick="abrirCarrito()">🛒 Ver carrito (<span id="contador">0</span>)</button>
+        <div class="productos-container">
+            <div class="producto">
+                <img src="labial mate" alt="labial mate">
+                <h3>Labial Matte</h3>
+                <p>$5</p>
+                <button onclick="abrirCarrito('Labial Matte', 5)">Agregar</button>
+            </div>
+            <div class="producto">
+                <img src="sombras" alt="Sombras">
+                <h3>Sombras</h3>
+                <p>$7</p>
+                <button onclick="abrirCarrito('Sombras', 7)">Agregar</button>
+            </div>
+            <div class="producto">
+                <img src="sabe liquida" alt="base liquida">
+                <h3>Base Líquida</h3>
+                <p>$12</p>
+                <button onclick="abrirCarrito('Base Líquida', 12)">Agregar</button>
+            </div>
+            <div class="producto">
+                <img src="perfumes" alt="Perfume">
+                <h3>Perfume</h3>
+                <p>$6</p>
+                <button onclick="abrirCarrito('Perfume', 6)">Agregar</button>
+            </div>
+            <div class="producto">
+                <img src="set de pesta" alt="Set de pestañas">
+                <h3>Set de pestañas"</h3>
+                <p>$10</p>
+                <button onclick="abrirCarrito('Set de pestañas', 10)">Agregar</button>
+            </div>
+        </div>
+    </section>
+  <div class="modal-content">
+    <span class="cerrar" onclick="cerrarCarrito()">❌</span>
+    <h2>Tu compra 🛒</h2>
+    <ul id="listaCarrito"></ul>
+    <p>Total: $<span id="total">0</span></p>
+    <button onclick="irAPago()">Ir a pagar</button>
+  </div>
+</div>
+    </section>
+    <footer>
+        <p>© 2026 Jaens Beauty</p>
+    </footer>
+    <script src="java.js"></script>
+    </body>
+</html>

@@ -1,0 +1,72 @@
+body {
+    margin: 0;
+    background-color: #e0c7da;
+    background-image: url("fondo\ 1"); 
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.encabezado {
+  background-image: url("fondo"); 
+  background-size: cover; 
+  background-position: center; 
+  padding: 60px;
+  color: rgb(10, 10, 10);
+  text-align: center;
+}
+nav a {
+    margin: 30px;
+    color: rgb(6, 6, 6);
+    text-decoration: none;
+    border: #ffe4e1;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}
+.hero {
+    text-align: center;
+    padding: 50px;
+    background-color:beige;
+    background-image: url("fondo\ 2"); 
+    font-family: 'Courier New', Courier, monospace;
+}
+.productos-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    padding: 20px;
+}
+h2 {
+   text-align: center; 
+   font-family: 'Times New Roman', Times, serif;
+}
+.producto {
+    background: rgb(245, 164, 164);
+    padding: 20px;
+    border-radius: 10px;
+    width: 150px;
+    text-align: center;
+}
+.producto img {
+    width: 90%;
+    border-radius: 10px;
+}
+button {
+    background-color: #ff69b4;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+#carrito {
+    text-align: center;
+    padding: 20px;
+}
+#lista-carrito {
+    list-style: none;
+    padding: 10px;
+}
+footer {
+    background-color: #ede7ea;
+    color: rgb(2, 2, 2);
+    text-align: center;
+    padding: 20px;
+    background-image: url("fondo"); 
+}

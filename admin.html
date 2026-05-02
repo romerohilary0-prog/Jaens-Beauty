@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel Admin - Jaens Beauty</title>
+    <link rel="stylesheet" href="estilo.css">
+    <style>
+        .admin-box { max-width: 1100px; margin: 40px auto; padding: 20px; font-family: sans-serif; }
+        
+        /* Estilos para el Buscador */
+        .filtros-box { 
+            background: #f9f9f9; 
+            padding: 20px; 
+            border-radius: 8px; 
+            margin-bottom: 20px; 
+            border: 1px solid #ddd;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        .input-busqueda { 
+            padding: 10px; 
+            width: 100%; 
+            border: 1px solid #ccc; 
+            border-radius: 5px; 
+            font-size: 16px;
+        }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { padding: 12px; border: 1px solid #ddd; text-align: left; }
+        th { background-color: #333; color: white; }
+        tr:hover { background-color: #f1f1f1; }
+        
+        .stats { display: flex; gap: 20px; margin-bottom: 20px; }
+        .card { background: #ff69b4; color: white; padding: 20px; border-radius: 8px; flex: 1; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="admin-box">
+        <h1>🚀 Panel de Control de Ventas</h1>
+        
+        <div class="stats">
+            <div class="card">
+                <h3>Total Pedidos</h3>
+                <p id="numVentas" style="font-size: 24px; font-weight: bold;">0</p>
+            </div>
+            <div class="card" style="background: #2ecc71;">
+                <h3>Recaudación Total</h3>
+                <p id="ingresosTotales" style="font-size: 24px; font-weight: bold;">$0.00</p>
+            </div>
+        </div>
+
+        <div class="filtros-box">
+            <strong style="min-width: 80px;">Buscar:</strong>
+            <input type="text" id="inputBuscar" class="input-busqueda" placeholder="Escribe el nombre del cliente o el ID de factura...">
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID Fac.</th>
+                    <th>Cliente</th>
+                    <th>Producto</th>
+                    <th>Cant.</th>
+                    <th>Total</th>
+                    <th>Fecha y Hora</th>
+                </tr>
+            </thead>
+            <tbody id="cuerpoAdmin">
+                </tbody>
+        </table>
+        <br>
+        <a href="cosmeticos.html">⬅ Volver a la Tienda</a>
+    </div>
+
+    <script>
+        let todasLasVentas = []; // Variable global para guardar los datos originales
+
+        async function cargarVentas() {
+            try {
+                const response = await fetch('http://localhost:3000/admin/ventas');
+                todasLasVentas = await response.json();
+                renderizarTabla(todasLasVentas); // Mostrar todos al inicio
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Error al conectar con el servidor.");
+            }
+        }
+
+        function renderizarTabla(datos) {
+            const tabla = document.getElementById("cuerpoAdmin");
+            let totalCaja = 0;
+            tabla.innerHTML = "";
+
+            if (datos.length === 0) {
+                tabla.innerHTML = "<tr><td colspan='6' style='text-align:center;'>No se encontraron resultados.</td></tr>";
+                document.getElementById("numVentas").textContent = "0";
+                document.getElementById("ingresosTotales").textContent = "0.00";
+                return;
+            }
+
+            datos.forEach(v => {
+                const subtotalSeguro = parseFloat(v.subtotal) || 0;
+                totalCaja += subtotalSeguro;
+                const fecha = v.fecha_emision ? new Date(v.fecha_emision).toLocaleString() : "N/A";
+                
+                tabla.innerHTML += `
+                    <tr>
+                        <td>${v.id_factura}</td>
+                        <td>${v.cliente}</td>
+                        <td>${v.producto}</td>
+                        <td>${v.cantidad}</td>
+                        <td>$${subtotalSeguro.toFixed(2)}</td>
+                        <td>${fecha}</td>
+                    </tr>
+                `;
+            });
+
+            document.getElementById("numVentas").textContent = datos.length;
+            document.getElementById("ingresosTotales").textContent = totalCaja.toFixed(2);
+        }
+
+        // LÓGICA DEL BUSCADOR
+        document.getElementById("inputBuscar").addEventListener("input", (e) => {
+            const termino = e.target.value.toLowerCase();
+            
+            const ventasFiltradas = todasLasVentas.filter(v => {
+                const nombreCliente = v.cliente.toLowerCase();
+                const idFactura = v.id_factura.toString();
+                
+                // Filtra si el nombre incluye el texto O si el ID de factura coincide
+                return nombreCliente.includes(termino) || idFactura.includes(termino);
+            });
+
+            renderizarTabla(ventasFiltradas);
+        });
+
+        window.onload = cargarVentas;
+    </script>
+</body>
+</html>

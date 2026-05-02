@@ -1,11 +1,11 @@
 body {
     margin: 0;
-    background-color: #e0c7da;
-    background-image: url("fondo\ 1"); 
+    background-color: #f890a1;
+    background-image: url(""); 
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
 .encabezado {
-  background-image: url("fondo"); 
+  background-image: url("https://i.pinimg.com/1200x/9d/43/de/9d43de7e6617ea55388d7e8c7ac1b4ff.jpg"); 
   background-size: cover; 
   background-position: center; 
   padding: 60px;
@@ -22,8 +22,7 @@ nav a {
 .hero {
     text-align: center;
     padding: 50px;
-    background-color:beige;
-    background-image: url("fondo\ 2"); 
+    background-image: url("https://i.pinimg.com/736x/95/b0/0a/95b00a4086ff6c357964cecde39ee4aa.jpg"); 
     font-family: 'Courier New', Courier, monospace;
 }
 .productos-container {
@@ -68,5 +67,20 @@ footer {
     color: rgb(2, 2, 2);
     text-align: center;
     padding: 20px;
-    background-image: url("fondo"); 
+    background-image: url("https://i.pinimg.com/1200x/9d/43/de/9d43de7e6617ea55388d7e8c7ac1b4ff.jpg"); 
+}
+.panel-carrito {
+    position: fixed;
+    top: 0;
+    right: -400px; /* Oculto fuera de la pantalla */
+    width: 350px;
+    height: 100%;
+    background: white;
+    transition: 0.3s; /* Efecto suave */
+    box-shadow: -2px 0 5px rgba(0,0,0,0.2);
+    z-index: 1000;
+}
+
+.panel-carrito.abierto {
+    right: 0; /* Aparece en pantalla */
 }

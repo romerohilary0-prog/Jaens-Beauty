@@ -13,7 +13,7 @@
     <h1>Jaens Beauty</h1>
 
     <nav>
-        <a href="#inicio">Inicio</a>
+        <a href="cosmeticos.html">Inicio</a> 
         <a href="#productos" onclick="cargarProductos()">Productos</a>
         <a href="#" onclick="mostrarCarrito()">🛒 Carrito (<span id="contador">0</span>)</a>
         <a href="login.html" class="login-btn">🙍‍♀️</a>
@@ -28,22 +28,29 @@
     <h2>Nuestros Productos</h2>
     <div class="productos-container" id="contenedor-productos"></div>
 </section>
-<div id="modalCarrito" class="modal">
-    <span id="usuarioTexto"></span>
-    <span id="contador">0</span>
-    <ul id="listaCarrito"></ul>
-    <span id="total">0</span>
 
-<div id="modalCarrito"></div>
-    <div class="modal-content">
-        <span class="cerrar" onclick="cerrarCarrito()"></span>
-        <ul id="listaCarrito"></ul>
-        <p>Total: $<span id="total">0</span></p>
+<div id="panelCarrito" class="panel-carrito">
+    <div class="panel-header">
+        <h2>Mi Bolsa</h2>
+        <button onclick="cerrarPanel()">✕</button>
     </div>
+    <div class="panel-body">
+        <ul id="listaCarritoDetalle"></ul>
+    </div>
+    <div class="panel-footer">
+        <p>Total: $<span id="totalVenta">0.00</span></p>
+        <button onclick="window.location.href='factura.html'">Ver Carrito Completo</button>
+    </div>
+    
 </div>
+
 <footer>
+<button class="btn-admin" onclick="window.location.href='admin.html'" style="background: #333; color: white; padding: 10px; border: none; border-radius: 5px; cursor: pointer; margin-left: 10px;">
+    Panel Administrador 🔐
+</button>
     <p>© 2026 Jaens Beauty</p>
 </footer>
+
 <script src="java.js"></script>
 </body>
 </html>

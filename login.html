@@ -11,10 +11,10 @@
 <body>
 
 <div id="login" class="form-body">
-    <img src="login 2.png" alt="user-login">
     <p class="text">Bienvenidos Jaens Beauty</p>
 
     <form class="login-form">
+        <img src="https://i.pinimg.com/736x/b9/62/69/b96269e616b61dc8223a235e069556be.jpg" alt="perfil">
         <input type="text" id="loginUser" placeholder="Email o nombre de usuario">
         <input type="password" id="loginPass" placeholder="Contraseña">
         <button type="button" onclick="iniciarSesion()">Iniciar</button>
@@ -33,22 +33,23 @@
     <input type="text" id="apellido" placeholder="Apellido">
     <input type="text" id="correo" placeholder="Correo">
     <input type="text" id="direccion" placeholder="Dirección">
-    <input type="text" id="numero" placeholder="Número">
-    <input type="text" id="regUser" placeholder="Usuario">
-    <input type="password" id="loginPass" placeholder="Contraseña">
+    <input type="text" id="numero" placeholder="Telefono">
+    <input type="password" id="contraseña" placeholder="Contraseña">
+
         <button type="button" onclick="registrar()">Registrarse</button>
+
     </form>
 
     <p>¿Ya tienes cuenta?
         <a href="#" onclick="mostrarLogin()">Inicia sesión</a>
     </p>
+
 </div>
 
 <div id="pantalla-usuario" style="display:none;">
     <h2>Bienvenido a Jaens Beauty</h2>
     <button onclick="cerrarSesion()">Ir a pagina principal</button>
 </div>
-
 <script src="scrip.js"></script>
 
 </body>

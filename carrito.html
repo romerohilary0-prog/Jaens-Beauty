@@ -1,0 +1,60 @@
+<table>
+    <thead>
+        <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Subtotal</th>
+        </tr>
+    </thead>
+    <tbody id="cuerpoFactura"></tbody> </table>
+
+<p>Total: $<span id="totalFactura">0.00</span></p>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Obtenemos el usuario activo
+        const usuario = localStorage.getItem("usuarioActivo");
+        
+        // Obtenemos todos los carritos y sacamos solo el del usuario actual
+        const todosLosCarritos = JSON.parse(localStorage.getItem("carritos")) || {};
+        const carrito = todosLosCarritos[usuario] || [];
+        
+        const cuerpo = document.getElementById("cuerpoFactura");
+        const totalSpan = document.getElementById("totalFactura");
+
+        if (!cuerpo) {
+            console.error("Error: No se encontró el cuerpo de la tabla.");
+            return;
+        }
+
+        let totalAcumulado = 0;
+        cuerpo.innerHTML = ""; 
+
+        // Si el carrito está vacío, avisamos al usuario
+        if (carrito.length === 0) {
+            cuerpo.innerHTML = "<tr><td colspan='4' style='text-align:center;'>Tu carrito está vacío</td></tr>";
+            return;
+        }
+
+        carrito.forEach(p => {
+            let precio = parseFloat(p.precio) || 0;
+            let cantidad = parseInt(p.cantidad) || 0;
+            let sub = precio * cantidad;
+            
+            totalAcumulado += sub;
+            
+            cuerpo.innerHTML += `
+                <tr>
+                    <td>${p.nombre}</td>
+                    <td>${cantidad}</td>
+                    <td>$${precio.toFixed(2)}</td>
+                    <td>$${sub.toFixed(2)}</td>
+                </tr>`;
+        });
+
+        if (totalSpan) {
+            totalSpan.textContent = totalAcumulado.toFixed(2);
+        }
+    });
+</script>

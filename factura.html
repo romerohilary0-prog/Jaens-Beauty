@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Factura - Jaens Beauty</title>
+    <link rel="stylesheet" href="estilo.css">
+    <style>
+        /* Estilos rápidos para que se vea bien */
+        .factura-box { max-width: 800px; margin: auto; padding: 20px; border: 1px solid #eee; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .btn-pagar { 
+            background: #ff69b4; color: white; padding: 10px 20px; 
+            border: none; cursor: pointer; font-size: 18px; width: 100%; 
+        }
+    </style>
+</head>
+<body>
+
+    <div class="factura-box">
+        <h1>Detalle de tu Compra</h1>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody id="cuerpoFactura">
+                </tbody>
+        </table>
+
+        <h3 style="text-align: right;">Total a Pagar: $<span id="totalFactura">0.00</span></h3>
+
+        <button class="btn-pagar" onclick="procesarFactura()">Confirmar y Guardar Compra</button>
+        
+        <br><br>
+        <a href="cosmeticos.html">Volver a la tienda</a>
+    </div>
+
+    <script src="java.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const usuario = localStorage.getItem("usuarioActivo");
+            const todosLosCarritos = JSON.parse(localStorage.getItem("carritos")) || {};
+            const miCarrito = todosLosCarritos[usuario] || [];
+            
+            const cuerpo = document.getElementById("cuerpoFactura");
+            const totalSpan = document.getElementById("totalFactura");
+
+            if (!cuerpo) return;
+
+            let totalAcumulado = 0;
+            cuerpo.innerHTML = ""; 
+
+            if (miCarrito.length === 0) {
+                cuerpo.innerHTML = "<tr><td colspan='4' style='text-align:center;'>El carrito está vacío</td></tr>";
+                return;
+            }
+
+            miCarrito.forEach(p => {
+                let sub = p.precio * p.cantidad;
+                totalAcumulado += sub;
+                cuerpo.innerHTML += `
+                    <tr>
+                        <td>${p.nombre}</td>
+                        <td>${p.cantidad}</td>
+                        <td>$${parseFloat(p.precio).toFixed(2)}</td>
+                        <td>$${sub.toFixed(2)}</td>
+                    </tr>`;
+            });
+
+            if (totalSpan) {
+                totalSpan.textContent = totalAcumulado.toFixed(2);
+            }
+        });
+    </script>
+</body>
+</html>
